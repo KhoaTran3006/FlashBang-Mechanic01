@@ -9,6 +9,13 @@ public class FlashBangThrowing : MonoBehaviour
     public Transform throwPoint;
     public float throwingForce;
 
+    //On Hand Equip
+    public GameObject flashbangPos;
+    public Transform fpsCam, player;
+    public Animator animator;
+
+
+
     [SerializeField]
     private bool isAiming = false;
     [SerializeField]
@@ -17,7 +24,8 @@ public class FlashBangThrowing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        flashbangPos.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -38,6 +46,22 @@ public class FlashBangThrowing : MonoBehaviour
             isAiming = false;
             isEquiped = false;
         }
+
+        //Equip Flashbang on Hand
+        if (isEquiped == true)
+        {
+            flashbangPos.SetActive(true);
+            animator.SetBool("onHand", true);
+        }
+        else if (isEquiped == false)
+        {
+            flashbangPos.SetActive(false);
+        }
+        if (isAiming == true)
+        {
+            animator.SetBool("aboutToThrow", true);
+        }
+
     }
 
     private void ThrowBlind()
@@ -45,7 +69,7 @@ public class FlashBangThrowing : MonoBehaviour
         GameObject fb = Instantiate(flashbangPrefab, throwPoint.position, Quaternion.identity);
         Rigidbody rb = fb.GetComponent<Rigidbody>();
 
-        if (rb != null )
+        if (rb != null)
         {
             rb.AddForce(throwPoint.forward * throwingForce, ForceMode.VelocityChange);
         }

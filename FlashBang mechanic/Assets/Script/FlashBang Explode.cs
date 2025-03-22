@@ -6,30 +6,37 @@ using UnityEngine;
 public class FlashBangExplode : MonoBehaviour
 {
     public float fuseTime = 2f;
-    public float explosionRadius = 10f;
-    public float blindDuration = 5f;
     public GameObject explosionEffect;
 
+    public float explosionRadius = 20f;
+    public float blindDuration = 5f;
+
+    private Camera cam;
+
     private bool isExploded = false;
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("Explode", fuseTime);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Invoke("Explode", fuseTime);
+        cam = GameObject.Find("Player Camera").GetComponent<Camera>();
     }
 
     private void Explode()
     {
-        if (isExploded) return; //prevent multiple explosions
-        isExploded = true;
+        //Destroy after exploded
+        Destroy(gameObject, 1f);
 
         //Explosion effect
-        /* if (explosionEffect =! null) { Instantiate(explosionEffect, transform.position, quaternion.identity*/
+        Destroy(Instantiate(explosionEffect, transform.position, Quaternion.identity), 5);
+
+
+        if (isExploded) return; //prevent multiple explosions
+        isExploded = true;
 
         //Detect all collider in the explosion range
         Collider[] hitCollider = Physics.OverlapSphere(transform.position, explosionRadius);
@@ -48,16 +55,17 @@ public class FlashBangExplode : MonoBehaviour
                     //pull the blind effect script in the player
                     PlayerBlinded blindEffect = collider.GetComponent<PlayerBlinded>();
 
+                    /*
                     //if the player has the script trigger the ffect
                     if (blindEffect != null)
                     {
                         blindEffect.TriggerBlindEffect(blindDuration);
                     }
+                    */
                 }
             }
         }
-        //Destroy after exploded
-        Destroy(gameObject, 1f);
+
     }
 
     private bool PlayerIsLooking(Transform player)
@@ -82,10 +90,14 @@ public class FlashBangExplode : MonoBehaviour
             {
                 if (hit.collider.gameObject == gameObject)
                 {
+                    PlayerBlinded.activeInstance.GoBlind();
+                    Debug.Log("isBlinded");
                     return true;// the player is looking with no object in between
                 }
             }
         }
+        Debug.Log("notBlinded");
         return false; //the player is not looking at the flash bang or being blocked
     }
+
 }

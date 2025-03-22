@@ -55,13 +55,7 @@ public class FlashBangExplode : MonoBehaviour
                     //pull the blind effect script in the player
                     PlayerBlinded blindEffect = collider.GetComponent<PlayerBlinded>();
 
-                    /*
-                    //if the player has the script trigger the ffect
-                    if (blindEffect != null)
-                    {
-                        blindEffect.TriggerBlindEffect(blindDuration);
-                    }
-                    */
+                    
                 }
             }
         }
@@ -74,7 +68,7 @@ public class FlashBangExplode : MonoBehaviour
 
         if (playerCam == null)
         {
-            return false; //No Camera found, assumethey are not looking
+            return false; //No Camera found, assume they are not looking
         }
 
         Vector3 cameraForward = playerCam.transform.forward;
@@ -82,7 +76,7 @@ public class FlashBangExplode : MonoBehaviour
 
         float dot = Vector3.Dot(cameraForward, toFlashbang);
 
-        //chec if the player is looking at the flash bang
+        //check if the player is looking at the flash bang
         if (dot > 0.5f)
         {
             RaycastHit hit;

@@ -150,5 +150,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuseTime: 2
   explosionEffect: {fileID: 2488476987121237851, guid: df8e3aad3ff757b429e6d2c4993abf66, type: 3}
-  explosionRadius: 20
+  explosionRadius: 25
   blindDuration: 5

@@ -53,9 +53,8 @@ public class FlashBangExplode : MonoBehaviour
                 if (PlayerIsLooking(playerTransform))
                 {
                     //pull the blind effect script in the player
-                    PlayerBlinded blindEffect = collider.GetComponent<PlayerBlinded>();
-
-                    
+                    //PlayerBlinded blindEffect = collider.GetComponent<PlayerBlinded>();
+                    PlayerBlinded.activeInstance.GoBlind();
                 }
             }
         }
@@ -84,7 +83,7 @@ public class FlashBangExplode : MonoBehaviour
             {
                 if (hit.collider.gameObject == gameObject)
                 {
-                    PlayerBlinded.activeInstance.GoBlind();
+                    //PlayerBlinded.activeInstance.GoBlind();
                     Debug.Log("isBlinded");
                     return true;// the player is looking with no object in between
                 }

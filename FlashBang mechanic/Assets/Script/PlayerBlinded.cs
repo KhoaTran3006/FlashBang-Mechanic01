@@ -13,6 +13,7 @@ public class PlayerBlinded : MonoBehaviour
 
     private int width, height;
     public static PlayerBlinded activeInstance;
+    public AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class PlayerBlinded : MonoBehaviour
 
     private IEnumerator goBlind()
     {
-
+        audioSource.Play();
         yield return new WaitForEndOfFrame();
         animator.SetTrigger("Go Blind");
 

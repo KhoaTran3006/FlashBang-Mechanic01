@@ -13,23 +13,14 @@ public class FlashBangThrowing : MonoBehaviour
     public GameObject flashbangPos;
     public Transform fpsCam, player;
     public Animator animator;
-    //public Camera cam;
-
-    //[Header("Display Control")]
-    //[SerializeField]
-    //[Range(10f, 100f)]
-    //private int LinePoints = 25;
-    //[SerializeField]
-    //[Range(0.01f, 0.25f)]
-    //private float TimeBetweenPoints = 0.1f;
-
-
-    //[SerializeField] private LineRenderer lineRenderer;
+    public AudioSource flashbangAudioSource;
+    public List<AudioClip> flashbangSounds;
+    
     [SerializeField]
     private bool isAiming = false;
     [SerializeField]
     private bool isEquiped = false;
-
+    private int currentEffects;
 
 
 
@@ -37,8 +28,6 @@ public class FlashBangThrowing : MonoBehaviour
     void Start()
     {
         flashbangPos.SetActive(false);
-
-
 
     }
 
@@ -49,16 +38,19 @@ public class FlashBangThrowing : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E)) //press E to toggle equip/unequip
         {
             isEquiped = !isEquiped;
+            if (isEquiped )
+            {
+                flashbangAudioSource.clip = flashbangSounds[0];
+                flashbangAudioSource.Play();
+            }
+            
         }
         if (Input.GetMouseButton(0) && isEquiped) // hold down right mouse button to aim
         {
             isAiming = true;
-            //DrawProjection(); //draw projection when aiming
+            
         }
-        /*else
-        {
-            lineRenderer.enabled = false;
-        }*/
+        
 
 
         if (Input.GetMouseButtonUp(0) && isAiming && isEquiped) //release right mouse button to throw
@@ -66,6 +58,8 @@ public class FlashBangThrowing : MonoBehaviour
             ThrowBlind();
             isAiming = false;
             isEquiped = false;
+            flashbangAudioSource.clip = flashbangSounds[1];
+            flashbangAudioSource.Play();
 
         }
 
@@ -95,27 +89,5 @@ public class FlashBangThrowing : MonoBehaviour
         {
             rb.AddForce(throwPoint.forward * throwingForce, ForceMode.VelocityChange);
         }
-    }
-
-    /*private void DrawProjection()
-    {
-        float mass = flashbangPrefab.GetComponent<Rigidbody>().mass; // get the flash grenade mass
-        //we will implement kinematic equation d = V0*t + 1/2*a*t^2
-        Debug.Log(mass);
-        lineRenderer.enabled = true;
-        lineRenderer.positionCount = Mathf.CeilToInt(LinePoints / TimeBetweenPoints) + 1;
-        Vector3 startPosition = throwPoint.position;
-        Vector3 startVelocity = throwingForce * cam.transform.forward / mass;
-
-        int i = 0;
-        for (float time = 0f; time < LinePoints; time += TimeBetweenPoints)
-        {
-            i++;
-            Vector3 point = startPosition + time * startVelocity;
-            //now implement the equation
-            point.y = startPosition.y + startVelocity.y * time + (Physics.gravity.y / 2f * time * time); //new point.y = startPosition.y, V0 =startVelocity.y, t = time, a = Physics.gravity, t^2 = time *time
-
-            lineRenderer.SetPosition(i, point);
-        }
-    }*/
+    }   
 }

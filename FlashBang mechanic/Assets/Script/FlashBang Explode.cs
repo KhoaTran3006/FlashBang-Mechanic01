@@ -7,9 +7,10 @@ public class FlashBangExplode : MonoBehaviour
 {
     public float fuseTime = 2f;
     public GameObject explosionEffect;
-
+    public AudioSource explosionSound;
     public float explosionRadius = 20f;
     public float blindDuration = 5f;
+    
 
     private Camera cam;
 
@@ -28,6 +29,7 @@ public class FlashBangExplode : MonoBehaviour
 
     private void Explode()
     {
+        explosionSound.Play();
         //Destroy after exploded
         Destroy(gameObject, 1f);
 
@@ -53,8 +55,9 @@ public class FlashBangExplode : MonoBehaviour
                 if (PlayerIsLooking(playerTransform))
                 {
                     //pull the blind effect script in the player
-                    //PlayerBlinded blindEffect = collider.GetComponent<PlayerBlinded>();
+                    
                     PlayerBlinded.activeInstance.GoBlind();
+
                 }
             }
         }

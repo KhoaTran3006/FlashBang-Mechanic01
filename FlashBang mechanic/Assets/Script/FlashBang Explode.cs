@@ -74,8 +74,8 @@ public class FlashBangExplode : MonoBehaviour
         }
 
         Vector3 cameraForward = playerCam.transform.forward;
-        Vector3 toFlashbang = (transform.position - playerCam.transform.position).normalized; // get the direction vector form the camera to the flash bang
-
+        Vector3 toFlashbang = (transform.position - playerCam.transform.position).normalized; // get the direction vector from the camera to the flash bang
+        //calculate the angle between 2 vector to determine is the flash bang is in the field of view of the player
         float dot = Vector3.Dot(cameraForward, toFlashbang);
 
         //check if the player is looking at the flash bang

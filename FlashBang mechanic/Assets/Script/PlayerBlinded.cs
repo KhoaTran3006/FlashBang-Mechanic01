@@ -15,7 +15,6 @@ public class PlayerBlinded : MonoBehaviour
     public static PlayerBlinded activeInstance;
     public AudioSource audioSource;
 
-    // Start is called before the first frame update
     void Start()
     {
         activeInstance = this;
@@ -27,6 +26,7 @@ public class PlayerBlinded : MonoBehaviour
 
     public void GoBlind()
     {
+        //FlashGrenade explode script trigger this
         StartCoroutine(goBlind());
     }
 
@@ -34,8 +34,10 @@ public class PlayerBlinded : MonoBehaviour
     {
         audioSource.Play();
         yield return new WaitForEndOfFrame();
+        //Trigger aniamtor
         animator.SetTrigger("Go Blind");
 
+        //Capture the Cam Image before WhiteScreen and re-play it on the Canvas for the AfterImage effect
         Texture2D tex = new Texture2D(width, height, TextureFormat.RGB24, false);
         tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         tex.Apply();

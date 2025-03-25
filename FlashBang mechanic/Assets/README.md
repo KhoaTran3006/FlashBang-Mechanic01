@@ -18,8 +18,8 @@ NOTES:
 When testing, please keep the Game View in full screen and do not switch between maximized and minimized modes. Changing the view during testing may cause errors.
 
 CREDITS:
-Khoa: Add Throwing mechanic, Blinded script, Audios
-Vy: OnHand animation, WhiteScreen + AfterImage scripts and effects
+Khoa: Add Throwing mechanic, Add Model 3D for Flash Grenade, Audios
+Vy: OnHand animation, Blinded script, WhiteScreen + AfterImage scripts and effects
 
 Gold Player by Hertzole 
 FlashGrenade Model by Raymond on Sketchfab.com

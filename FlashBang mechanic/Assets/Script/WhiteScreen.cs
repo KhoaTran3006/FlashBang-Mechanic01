@@ -11,7 +11,6 @@ public class WhiteScreen : MonoBehaviour
 
     public static WhiteScreen activeInstance;
 
-    // Start is called before the first frame update
     void Start()
     {
         activeInstance = this;
@@ -21,6 +20,7 @@ public class WhiteScreen : MonoBehaviour
 
     public void FlashEffect()
     {
+        //Trigger WhiteScreen animator
         animator.SetTrigger("Go Blind");
     }
 

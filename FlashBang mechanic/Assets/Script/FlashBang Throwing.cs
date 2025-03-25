@@ -15,7 +15,7 @@ public class FlashBangThrowing : MonoBehaviour
     public Animator animator;
     public AudioSource flashbangAudioSource;
     public List<AudioClip> flashbangSounds;
-    
+
     [SerializeField]
     private bool isAiming = false;
     [SerializeField]
@@ -38,19 +38,19 @@ public class FlashBangThrowing : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E)) //press E to toggle equip/unequip
         {
             isEquiped = !isEquiped;
-            if (isEquiped )
+            if (isEquiped)
             {
                 flashbangAudioSource.clip = flashbangSounds[0];
                 flashbangAudioSource.Play();
             }
-            
+
         }
         if (Input.GetMouseButton(0) && isEquiped) // hold down right mouse button to aim
         {
             isAiming = true;
-            
+
         }
-        
+
 
 
         if (Input.GetMouseButtonUp(0) && isAiming && isEquiped) //release right mouse button to throw
@@ -89,5 +89,5 @@ public class FlashBangThrowing : MonoBehaviour
         {
             rb.AddForce(throwPoint.forward * throwingForce, ForceMode.VelocityChange);
         }
-    }   
+    }
 }
